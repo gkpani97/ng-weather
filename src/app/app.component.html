@@ -336,20 +336,35 @@
   <h2>Resources</h2>
   <p>Need to catch on with your close ones?</p>
   <p>Know how's the weather around, to take a guess about their mood.</p>
+  <br>
+  <p>You have to enter your PIN/ ZIP Codes, along with ISO Alpha 2 Country Code, that can be found <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></p>
   <br><br>
 
-  <div class="container" *ngFor="let WR of weatherData">
+  <form class="form-inline" [formGroup]="inputObj" (ngSubmit)="AddZIPCC()">
+    <div class="form-group mb-2">
+      <label for="ZIP" class="sr-only">ZIP:</label>
+      <input type="text" class="form-control" id="ZIP" placeholder="enter ZIP Code" formControlName="zip">
+    </div>
+    <div class="form-group mb-2">
+      <label for="CCode" class="sr-only">Country Code:</label>
+      <input type="text" class="form-control" id="CCode" placeholder="enter Country Code" formControlName="ccode">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Add</button>
+  </form>
+  <br><br>
+
+  <div class="container"  style="display: flex;width: 90%">
     
-    <div class="card" style="display:flex;width: 28rem; height:20rem">
+    <div class="card" *ngFor="let WR of weatherData" style="padding: 2px 14px; flex: 1; display: flex; width: 28rem; height:18rem">
       <div class="row">
         <div class="mt-3">
           <div class="card-body">
             <h4 class="card-title">{{WR.name}}, {{WR.sys.country}}</h4>
             <h5 class="card-subtitle mb-2 text-muted">{{WR.weather[0].main}}</h5>
             <h5 class="card-subtitle mb-2 text-muted">{{WR.weather[0].description}}</h5>
-            <p class="card-text">Temp:{{WR.main.temp - 274.15}} celsius</p>
-            <p class="card-text">Humidity:{{WR.main.humidity}} %</p>
-            <p class="card-text">Wind Speed:{{WR.wind.speed}} kmph</p>
+            <p class="card-text">Temp: {{(WR.main.temp - 274.15).toFixed(2)}} celsius</p>
+            <p class="card-text">Humidity: {{WR.main.humidity}} %</p>
+            <p class="card-text">Wind Speed: {{WR.wind.speed}} kmph</p>
           </div>
         </div>
       </div>
