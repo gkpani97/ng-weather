@@ -334,10 +334,26 @@
 
   <!-- Resources -->
   <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
+  <p>Need to catch on with your close ones?</p>
+  <p>Know how's the weather around, to take a guess about their mood.</p>
+  <br><br>
 
-  <div class="card-container">
-    weather cards go here
+  <div class="container" *ngFor="let WR of weatherData">
+    
+    <div class="card" style="display:flex;width: 28rem; height:20rem">
+      <div class="row">
+        <div class="mt-3">
+          <div class="card-body">
+            <h4 class="card-title">{{WR.name}}, {{WR.sys.country}}</h4>
+            <h5 class="card-subtitle mb-2 text-muted">{{WR.weather[0].main}}</h5>
+            <h5 class="card-subtitle mb-2 text-muted">{{WR.weather[0].description}}</h5>
+            <p class="card-text">Temp:{{WR.main.temp - 274.15}} celsius</p>
+            <p class="card-text">Humidity:{{WR.main.humidity}} %</p>
+            <p class="card-text">Wind Speed:{{WR.wind.speed}} kmph</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
